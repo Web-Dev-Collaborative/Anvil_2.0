@@ -28,4 +28,4 @@ class File(db.Model):
 
     file_type = db.relationship("FileType", back_populates="file")
     file_tag = db.relationship("FileTag", back_populates="file")
-    folder_id = db.relationship("Folder", back_populates="file")
+    folder = db.relationship("Folder", back_populates="file")

@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
 
     folder = db.relationship("Folder", back_populates="user")
     tag = db.relationship("Tag", back_populates="user")
+    category = db.relationship("Category", back_populates="user")
 
     @property
     def password(self):
