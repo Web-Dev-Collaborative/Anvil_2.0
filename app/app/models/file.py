@@ -5,6 +5,7 @@ from .db import db
 class File(db.Model):
     __tablename__ = 'files'
 
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     s3_url = db.Column(db.String(255), nullable=False)
     folder_id = db.Column(db.Integer,

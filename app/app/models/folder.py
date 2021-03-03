@@ -22,3 +22,4 @@ class Folder(db.Model):
 
     user = db.relationship("User", back_populates="folder")
     category = db.relationship("Category", back_populates="folder")
+    file = db.relationship("File", back_populates="folder")
