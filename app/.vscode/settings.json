@@ -1,9 +1,3 @@
 {
-    "python.pythonPath": ".venv/bin/python",
-    "python.linting.pylintEnabled": false,
-    "python.linting.enabled": true,
-    "python.linting.pycodestyleEnabled": true,
-    "editor.tabSize": 4,
-    "editor.insertSpaces": true,
-    "editor.detectIndentation": false
+    "python.pythonPath": ".venv/bin/python"
 }
