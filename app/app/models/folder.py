@@ -28,10 +28,8 @@ class Folder(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "user_id": self.user_id,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
             "category": {"id": self.category.id, "name": self.category.name},
             "files": [user_file for user_file in self.file]
-
         }
