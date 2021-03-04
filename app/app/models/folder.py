@@ -23,3 +23,15 @@ class Folder(db.Model):
     user = db.relationship("User", back_populates="folder")
     category = db.relationship("Category", back_populates="folder")
     file = db.relationship("File", back_populates="folder")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "user_id": self.user_id,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "category": {"id": self.category.id, "name": self.category.name},
+            "files": [user_file for user_file in self.file]
+
+        }
