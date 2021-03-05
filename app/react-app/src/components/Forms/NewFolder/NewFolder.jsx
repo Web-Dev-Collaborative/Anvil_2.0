@@ -24,8 +24,8 @@ const NewFolder = () => {
       userId: currentUser,
       categoryId: Number(category),
     };
-    console.log(newFolderData);
     dispatch(createUserFolder(newFolderData));
+    return newFolderData;
   };
 
   return (

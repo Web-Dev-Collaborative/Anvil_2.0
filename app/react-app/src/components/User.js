@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { deleteUserFolder } from "../store/reducers/user";
@@ -49,6 +49,9 @@ function User() {
             <li key={folder.id}>
               {folder.name}{" "}
               <button onClick={() => submitDelete(folder.id)}>Delete</button>
+              <button>
+                <NavLink to={`/folder/edit/${folder.id}`}>Edit</NavLink>
+              </button>
             </li>
           ))}
       </ul>

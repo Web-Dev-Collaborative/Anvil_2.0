@@ -1,2 +1,4 @@
 import NewFolder from "./NewFolder";
-export { NewFolder };
+import EditFolder from "./EditFolder";
+
+export { NewFolder, EditFolder };
