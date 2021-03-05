@@ -13,3 +13,10 @@ class Category(db.Model):
 
     user = db.relationship("User", back_populates="category")
     folder = db.relationship("Folder", back_populates="category")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "user_id": self.user_id,
+        }

@@ -13,3 +13,4 @@ class Tag(db.Model):
                         nullable=True)
 
     user = db.relationship("User", back_populates="tag")
+    file_tag = db.relationship("FileTag", back_populates="tag")

@@ -32,5 +32,6 @@ class User(db.Model, UserMixin):
         return {
           "id": self.id,
           "username": self.username,
-          "email": self.email
+          "email": self.email,
+          "folders": [user_folder.to_dict() for user_folder in self.folder]
         }
