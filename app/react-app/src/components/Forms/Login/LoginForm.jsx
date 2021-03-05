@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../../store/reducers/user";
+import { login } from "../../../store/reducers/user";
 
 const LoginForm = ({ authenticated, setAuthenticated }) => {
   const [errors, setErrors] = useState([]);

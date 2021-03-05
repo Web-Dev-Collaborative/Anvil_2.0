@@ -42,7 +42,11 @@ export const signup = ({ username, email, password }) => async (dispatch) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, email, password }),
+    body: JSON.stringify({
+      username: username,
+      email: email,
+      password: password,
+    }),
   });
 
   const parsedResponse = await response.json();
