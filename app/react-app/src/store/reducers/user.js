@@ -14,23 +14,42 @@ const removeUser = () => ({
   type: REMOVE_USER,
 });
 
+export const signup = ({ username, email, password }) => async (dispatch) => {
+  const response = await fetch("/api/auth/signup", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, email, password }),
+  });
+
+  const parsedResponse = await response.json();
+  dispatch(setUser(parsedResponse));
+  return parsedResponse;
+};
+
 export const login = ({ email, password }) => async (dispatch) => {
   const response = await fetch("/api/auth/login", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       email,
       password,
     }),
   });
 
-  dispatch(setUser(response));
-  return response;
+  const parsedResponse = await response.json();
+  dispatch(setUser(parsedResponse));
+  return parsedResponse;
 };
 
 export const restoreUser = () => async (dispatch) => {
   const response = await fetch("/api/auth/");
-  dispatch(setUser(response));
-  return response;
+  const parsedResponse = await response.json();
+  dispatch(setUser(parsedResponse));
+  return parsedResponse;
 };
 
 export const logout = () => async (dispatch) => {
@@ -47,5 +66,9 @@ const userReducer = (state = initialState, action) => {
     case REMOVE_USER:
       const removeUserInfo = { ...state, user: null };
       return removeUserInfo;
+    default:
+      return state;
   }
 };
+
+export default userReducer;

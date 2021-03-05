@@ -31,5 +31,5 @@ class Folder(db.Model):
             "created_at": self.created_at,
             "updated_at": self.updated_at,
             "category": {"id": self.category.id, "name": self.category.name},
-            "files": [user_file for user_file in self.file]
+            "files": [user_file.to_dict() for user_file in self.file]
         }

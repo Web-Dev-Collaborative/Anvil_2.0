@@ -34,5 +34,5 @@ class File(db.Model):
             "file_type": self.file_type,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
-            "file_tags": [user_file_tag for user_file_tag in self.file_tag],
+            "file_tags": [user_file_tag.to_dict() for user_file_tag in self.file_tag],
         }
