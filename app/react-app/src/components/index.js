@@ -1,5 +1,5 @@
-import { LoginForm, SignUpForm, LogoutButton, ProtectedRoute } from "./auth";
-import { NewFolder, EditFolder } from "./Forms";
+import { LogoutButton, ProtectedRoute } from "./auth";
+import { NewFolder, EditFolder, LoginForm, SignUpForm } from "./Forms";
 
 export {
   LoginForm,
