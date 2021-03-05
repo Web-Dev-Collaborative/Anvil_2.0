@@ -1,4 +1,11 @@
 import { LoginForm, SignUpForm, LogoutButton, ProtectedRoute } from "./auth";
-import { NewFolder } from "./Forms";
+import { NewFolder, EditFolder } from "./Forms";
 
-export { LoginForm, SignUpForm, LogoutButton, ProtectedRoute, NewFolder };
+export {
+  LoginForm,
+  SignUpForm,
+  LogoutButton,
+  ProtectedRoute,
+  NewFolder,
+  EditFolder,
+};

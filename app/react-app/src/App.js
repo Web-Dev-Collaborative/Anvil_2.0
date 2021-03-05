@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { LoginForm, SignUpForm, ProtectedRoute, NewFolder } from "./components";
+import {
+  LoginForm,
+  SignUpForm,
+  ProtectedRoute,
+  NewFolder,
+  EditFolder,
+} from "./components";
 
 import NavBar from "./components/NavBar";
 import UsersList from "./components/UsersList";
@@ -58,6 +64,12 @@ function App() {
         >
           <User />
           <NewFolder />
+        </ProtectedRoute>
+        <ProtectedRoute
+          path="/folder/edit/:folderId"
+          authenticated={authenticated}
+        >
+          <EditFolder />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <h1>My Home Page</h1>
