@@ -69,8 +69,9 @@ export const restoreUser = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   const response = await fetch("/api/auth/logout");
+  const parsedResponse = await response.json();
   dispatch(removeUser());
-  return response;
+  return parsedResponse;
 };
 
 export const createUserFolder = ({ name, userId, categoryId }) => async (
@@ -97,6 +98,7 @@ export const deleteUserFolder = (id) => async (dispatch) => {
   const response = await fetch(`/api/folder/${id}`, { method: "DELETE" });
   const parsedResponse = await response.json();
   dispatch(deleteFolder(parsedResponse));
+  return parsedResponse;
 };
 
 const userReducer = (state = initialState, action) => {
