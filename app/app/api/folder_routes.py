@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from app.models import db, Folder
 from app.forms import NewFolderForm
@@ -32,3 +32,15 @@ def create_folder():
         db.session.commit()
         return folder.to_dict()
     return {'errors': form_errors(form.errors)}
+
+
+@folder_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_folder(id):
+    folder = Folder.query.get(id)
+    db.session.delete(folder)
+    db.session.commit()
+
+    user_folders = Folder.query.filter_by(user_id=current_user.id)
+
+    return {"folders": [folder.to_dict() for folder in user_folders]}
