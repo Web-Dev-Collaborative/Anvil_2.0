@@ -2,9 +2,11 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
 import userReducer from "./reducers/user";
+import categoryReducer from "./reducers/categories";
 
 const rootReducer = combineReducers({
   user: userReducer,
+  categories: categoryReducer,
 });
 
 const envSelection = () => {

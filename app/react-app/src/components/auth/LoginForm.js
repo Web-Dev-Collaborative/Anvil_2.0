@@ -12,7 +12,6 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    console.log("FORM SUBMISSION DATA {PRE-THUNK}", email, password);
     const user = await dispatch(login({ email, password }));
     if (!user.errors) {
       setAuthenticated(true);

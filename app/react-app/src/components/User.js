@@ -13,7 +13,6 @@ function User() {
       const response = await fetch(`/api/users/${userId}`);
       const user = await response.json();
       setUser(user);
-      console.log(user);
     })();
   }, [userId]);
 

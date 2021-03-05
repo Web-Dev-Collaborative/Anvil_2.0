@@ -1,9 +1,13 @@
 const initialState = {
-  user: null,
+  id: null,
+  email: null,
+  username: null,
+  folders: [],
 };
 
 const SET_USER = "user/setUser";
 const REMOVE_USER = "user/removeUser";
+const CREATE_FOLDER = "user/createFolder";
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -12,6 +16,11 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
   type: REMOVE_USER,
+});
+
+const createFolder = (folder) => ({
+  type: CREATE_FOLDER,
+  folder,
 });
 
 export const signup = ({ username, email, password }) => async (dispatch) => {
@@ -58,14 +67,41 @@ export const logout = () => async (dispatch) => {
   return response;
 };
 
+export const createUserFolder = ({ name, userId, categoryId }) => async (
+  dispatch
+) => {
+  const response = await fetch("/api/folder", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: name,
+      user_id: userId,
+      category_id: categoryId,
+    }),
+  });
+
+  const parsedResponse = await response.json();
+  dispatch(createFolder(parsedResponse));
+  return parsedResponse;
+};
+
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
-      const saveUserInfo = { ...state, user: action.user };
+      const { id, email, username, folders } = action.user;
+      const saveUserInfo = { ...state, id, email, username, folders };
       return saveUserInfo;
     case REMOVE_USER:
-      const removeUserInfo = { ...state, user: null };
+      const removeUserInfo = { ...state, initialState };
       return removeUserInfo;
+    case CREATE_FOLDER:
+      const addUserFolder = {
+        ...state,
+        folders: [...state.folders, action.folder],
+      };
+      return addUserFolder;
     default:
       return state;
   }
