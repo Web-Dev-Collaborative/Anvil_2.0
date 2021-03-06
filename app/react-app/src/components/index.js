@@ -1,6 +1,6 @@
 import { LogoutButton, ProtectedRoute } from "./auth";
 import { NewFolder, EditFolder, LoginForm, SignUpForm } from "./Forms";
-
+import { LandingPage } from "./LandingPage";
 export {
   LoginForm,
   SignUpForm,
@@ -8,4 +8,5 @@ export {
   ProtectedRoute,
   NewFolder,
   EditFolder,
+  LandingPage,
 };

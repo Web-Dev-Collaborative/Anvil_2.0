@@ -1,43 +1,27 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../../store/reducers/user";
 
-const SignUpForm = ({ authenticated, setAuthenticated }) => {
+const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
 
   const dispatch = useDispatch();
+  const loggedIn = useSelector((state) =>
+    state.user.id ? state.user.id : null
+  );
 
-  const onSignUp = async (e) => {
+  const onSignUp = (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await dispatch(signup({ username, email, password }));
-      if (!user.errors) {
-        setAuthenticated(true);
-      }
+      dispatch(signup({ username, email, password }));
     }
   };
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const updateRepeatPassword = (e) => {
-    setRepeatPassword(e.target.value);
-  };
-
-  if (authenticated) {
+  if (loggedIn) {
     return <Redirect to="/" />;
   }
 
@@ -48,7 +32,7 @@ const SignUpForm = ({ authenticated, setAuthenticated }) => {
         <input
           type="text"
           name="username"
-          onChange={updateUsername}
+          onChange={(e) => setUsername(e.target.value)}
           value={username}
         ></input>
       </div>
@@ -57,7 +41,7 @@ const SignUpForm = ({ authenticated, setAuthenticated }) => {
         <input
           type="text"
           name="email"
-          onChange={updateEmail}
+          onChange={(e) => setEmail(e.target.value)}
           value={email}
         ></input>
       </div>
@@ -66,7 +50,7 @@ const SignUpForm = ({ authenticated, setAuthenticated }) => {
         <input
           type="password"
           name="password"
-          onChange={updatePassword}
+          onChange={(e) => setPassword(e.target.value)}
           value={password}
         ></input>
       </div>
@@ -75,7 +59,7 @@ const SignUpForm = ({ authenticated, setAuthenticated }) => {
         <input
           type="password"
           name="repeat_password"
-          onChange={updateRepeatPassword}
+          onChange={(e) => setRepeatPassword(e.target.value)}
           value={repeatPassword}
           required={true}
         ></input>

@@ -1,34 +1,27 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../store/reducers/user";
 
-const LoginForm = ({ authenticated, setAuthenticated }) => {
+const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+  const loggedIn = useSelector((state) =>
+    state.user.id ? state.user.id : null
+  );
 
   const onLogin = async (e) => {
     e.preventDefault();
     const user = await dispatch(login({ email, password }));
-    if (!user.errors) {
-      setAuthenticated(true);
-    } else {
+    if (user.errors) {
       setErrors(user.errors);
     }
   };
 
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  if (authenticated) {
+  if (loggedIn !== null) {
     return <Redirect to="/" />;
   }
 
@@ -46,7 +39,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
           type="text"
           placeholder="Email"
           value={email}
-          onChange={updateEmail}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div>
@@ -56,7 +49,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
           type="password"
           placeholder="Password"
           value={password}
-          onChange={updatePassword}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Login</button>
       </div>
