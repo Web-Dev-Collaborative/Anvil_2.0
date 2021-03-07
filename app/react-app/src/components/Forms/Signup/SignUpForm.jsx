@@ -26,45 +26,51 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <form onSubmit={onSignUp} className="bg-secondTransparent">
       <div>
-        <label>User Name</label>
         <input
           type="text"
           name="username"
+          placeholder="=> Username"
           onChange={(e) => setUsername(e.target.value)}
           value={username}
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree ml-2"
         ></input>
       </div>
       <div>
-        <label>Email</label>
         <input
           type="text"
           name="email"
+          placeholder="=> Email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree ml-2 mt-2"
         ></input>
       </div>
       <div>
-        <label>Password</label>
         <input
           type="password"
           name="password"
+          placeholder="=> Password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree ml-2 mt-2"
         ></input>
       </div>
       <div>
-        <label>Repeat Password</label>
         <input
           type="password"
           name="repeat_password"
+          placeholder="=> Confirm Password"
           onChange={(e) => setRepeatPassword(e.target.value)}
           value={repeatPassword}
           required={true}
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree ml-2 mt-2"
         ></input>
       </div>
-      <button type="submit">Sign Up</button>
+      <div className="bg-accentThree text-main text-xl font-bold m-2 rounded-md text-center p-2 ">
+        <button type="submit">Sign Up</button>
+      </div>
     </form>
   );
 };

@@ -3,42 +3,46 @@ import { useSelector } from "react-redux";
 
 import { LogoutButton, DemoUserButton } from "../../auth";
 
-const NavBar = () => {
+const NavBar = ({ setLocation }) => {
   const currentUser = useSelector((state) =>
     state.user.id ? state.user.id : null
   );
 
   return (
-    <nav>
-      <ul>
-        {!currentUser && (
-          <>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/sign-up">Sign Up</Link>
-            </li>
-
-            <li>
-              <DemoUserButton />
-            </li>
-          </>
-        )}
-        {currentUser && (
-          <>
-            <li>
-              <LogoutButton />
-            </li>
-            <li>
-              <Link to="/home">Home</Link>
-            </li>
-            <li>
-              <Link to={`/users/${currentUser}`}>Users</Link>
-            </li>
-          </>
-        )}
-      </ul>
+    <nav className="bg-secondary shadow-custom-shadow flex flex-row justify-between">
+      {!currentUser && (
+        <div className="text-accentOne text-xl flex p-2">
+          <div className="pl-3">
+            <Link to="/login" onClick={() => setLocation("/login")}>
+              Login
+            </Link>
+          </div>
+          <p className="pl-2"> | </p>
+          <div className="pl-2">
+            <Link to="/sign-up" onClick={() => setLocation("/sign-up")}>
+              Sign Up
+            </Link>
+          </div>
+          <p className="pl-2"> | </p>
+          <div className="pl-2">
+            <DemoUserButton setLocation={setLocation} />
+          </div>
+        </div>
+      )}
+      {currentUser && (
+        <div className="text-accentOne text-xl flex p-2 pl-3">
+          <div className="pl-2">
+            <LogoutButton />
+          </div>
+          <p className="pl-2"> | </p>
+          <div className="pl-2">
+            <Link to="/home">Home</Link>
+          </div>
+        </div>
+      )}
+      <p className="text-accentOne text-xl flex pt-2 pr-5">
+        A text editor for developers
+      </p>
     </nav>
   );
 };

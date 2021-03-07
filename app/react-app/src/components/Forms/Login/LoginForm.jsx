@@ -26,32 +26,34 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
+    <form onSubmit={onLogin} className="bg-secondTransparent">
       <div>
         {errors.map((error) => (
           <div>{error}</div>
         ))}
       </div>
       <div>
-        <label htmlFor="email">Email</label>
         <input
           name="email"
           type="text"
-          placeholder="Email"
+          placeholder=" => Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree ml-2"
         />
       </div>
       <div>
-        <label htmlFor="password">Password</label>
         <input
           name="password"
           type="password"
-          placeholder="Password"
+          placeholder="=> Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne border-2 border-accentThree mt-2 ml-2 placeholder-accentOne"
         />
-        <button type="submit">Login</button>
+        <div className="bg-accentThree text-main text-xl font-bold m-2 rounded-md text-center p-2 ">
+          <button type="submit">Log In</button>
+        </div>
       </div>
     </form>
   );

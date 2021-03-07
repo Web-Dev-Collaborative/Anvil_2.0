@@ -1,12 +1,14 @@
-import { LogoutButton, ProtectedRoute } from "./auth";
+import { LogoutButton } from "./auth";
 import { NewFolder, EditFolder, LoginForm, SignUpForm } from "./Forms";
 import { LandingPage } from "./LandingPage";
+import Home from "./Home";
+
 export {
   LoginForm,
   SignUpForm,
   LogoutButton,
-  ProtectedRoute,
   NewFolder,
   EditFolder,
   LandingPage,
+  Home,
 };

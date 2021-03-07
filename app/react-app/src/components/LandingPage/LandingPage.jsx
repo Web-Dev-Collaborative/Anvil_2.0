@@ -1,26 +1,76 @@
+import { useState } from "react";
 import { Switch, Route } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faCodeBranch } from "@fortawesome/free-solid-svg-icons";
 
 import { LoginForm, SignUpForm } from "../Forms";
+import CommandPrompt from "../CommandPrompt";
 import NavBar from "./NavBar";
-import User from "../User";
 
 const LandingPage = () => {
+  const [location, setLocation] = useState(window.location.pathname);
+
   return (
-    <div>
-      <NavBar />
-      <h1>This is a Landing Page</h1>
-      <Switch>
-        <Route exact path="/login">
-          <h1>Login Form</h1>
-          <LoginForm />
-        </Route>
-        <Route exact path="/sign-up">
-          <SignUpForm />
-        </Route>
-        <Route exact path="/users/:id">
-          <User />
-        </Route>
-      </Switch>
+    <div className="bg-main bg-cover h-screen">
+      <NavBar setLocation={setLocation} />
+      <div className="grid grid-cols-2 h-5/6 mt-8 ml-10 mr-10 mb-8">
+        <div className="col-start-1 col-end-1 m-2 p-2 border-2 border-accentThree">
+          <CommandPrompt location={location} />
+          <div className="w-1/2 h-1/2 ml-6">
+            <img
+              src="https://anvil-file-bucket.s3.amazonaws.com/images/name-ascii.png"
+              alt="hidden"
+              className="pt-10 "
+            />
+            <img
+              src="https://anvil-file-bucket.s3.amazonaws.com/images/anvil-ascii.png"
+              alt="hidden"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-row-2">
+          <div className="row-start-1 row-end-2 m-2 p-2 border-2 border-accentThree">
+            <CommandPrompt location={location} />
+            <h1 className="text-accentOne">About</h1>
+          </div>
+
+          <div className="row-start-2 row-end-3 m-2 p-2 border-2 border-accentThree">
+            <CommandPrompt location={location} />
+            <Switch>
+              <Route exact path="/login">
+                <div className="flex mt-12 ml-12">
+                  <LoginForm />
+                </div>
+              </Route>
+              <Route exact path="/sign-up">
+                <div className="flex mt-12 ml-12">
+                  <SignUpForm />
+                </div>
+              </Route>
+            </Switch>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-row justify-between w-1/2 m-auto text-accentOne text-3xl">
+        <button>
+          <a href="https://www.linkedin.com/in/william-vincent-5658851ba/">
+            <FontAwesomeIcon icon={faLinkedin} />
+          </a>
+        </button>
+        <button>
+          <a href="https://github.com/WJVincent">
+            <FontAwesomeIcon icon={faGithub} />
+          </a>
+        </button>
+
+        <button>
+          <a href="https://github.com/WJVincent/Anvil">
+            <FontAwesomeIcon icon={faCodeBranch} />
+          </a>
+        </button>
+      </div>
     </div>
   );
 };

@@ -9,32 +9,40 @@ const CommandPrompt = ({ location, setLocation }) => {
     switch (location) {
       case "/":
         setPromptText(
-          'Where "Hello World" meets "It was a dark and stormy night."'
+          'Where "Hello World" meets "It was a dark and stormy night. "'
         );
         break;
       case String(location.match(/\/home\/folder\/edit\/\d+/)):
         setPromptText(" sudo mv folder-name new-folder-name ");
         break;
       case "/home/folder/new":
-        setPromptText("mkdir new-folder");
+        setPromptText("mkdir new-folder ");
         break;
       case "/home":
         setPromptText(
-          ' ~/ sweet ~/  => echo "Windows users wouldn\'t understand"'
+          ' ~/ sweet ~/  => echo "Windows users wouldn\'t understand "'
         );
         break;
+      case "/login":
+        setPromptText(
+          "Let me see your identification... and go about your business"
+        );
+        break;
+      case "/sign-up":
+        setPromptText("Welcome to the dark side, we have cookies :) ");
+        break;
       default:
-        setPromptText("something isn't right here....");
+        setPromptText("Something isn't right here.... ");
         break;
     }
   }, [location]);
 
   const username = useSelector((state) =>
-    state.session.user ? state.session.user.username : null
+    state.user ? state.user.username : null
   );
 
   return (
-    <h1 className="font-jetbrains font-medium text-2xl flex flex-row pb-5">
+    <h1 className="font-jetbrains font-medium text-xl flex flex-row pb-5">
       <span className="text-accentTwo">
         {" "}
         {location !== "/" ? (
