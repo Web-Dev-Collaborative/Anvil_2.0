@@ -1,30 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useParams, NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import { deleteUserFolder } from "../store/reducers/user";
 
 function User() {
-  const [user, setUser] = useState({});
-  const { userId } = useParams();
-
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!userId) {
-      return;
-    }
-    (async () => {
-      const response = await fetch(`/api/users/${userId}`);
-      const user = await response.json();
-      setUser(user);
-    })();
-  }, [userId]);
-
-  if (!user) {
-    return null;
-  }
-
+  const user = useSelector((state) => state.user);
   const submitDelete = (id) => {
     dispatch(deleteUserFolder(id));
   };
@@ -33,7 +14,7 @@ function User() {
     <>
       <ul>
         <li>
-          <strong>User Id</strong> {userId}
+          <strong>User Id</strong> {user.id}
         </li>
         <li>
           <strong>Username</strong> {user.username}

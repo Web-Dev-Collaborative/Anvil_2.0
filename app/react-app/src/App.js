@@ -1,79 +1,32 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import {
-  LoginForm,
-  SignUpForm,
-  ProtectedRoute,
-  NewFolder,
-  EditFolder,
-} from "./components";
 
-import NavBar from "./components/NavBar";
-import UsersList from "./components/UsersList";
-import User from "./components/User";
+import { useDispatch } from "react-redux";
+import { LandingPage, Home } from "./components";
+
 import { restoreUser } from "./store/reducers/user";
 
 function App() {
-  const [authenticated, setAuthenticated] = useState(false);
-  const [loaded, setLoaded] = useState(false);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async () => {
-      const user = await dispatch(restoreUser());
-      if (!user.errors) {
-        setAuthenticated(true);
-      }
-      setLoaded(true);
-    })();
+    dispatch(restoreUser());
   }, [dispatch]);
-
-  if (!loaded) {
-    return null;
-  }
 
   return (
     <BrowserRouter>
-      <NavBar setAuthenticated={setAuthenticated} />
       <Switch>
-        <Route path="/login" exact={true}>
-          <LoginForm
-            authenticated={authenticated}
-            setAuthenticated={setAuthenticated}
-          />
+        <Route path="/home">
+          <Home />
         </Route>
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm
-            authenticated={authenticated}
-            setAuthenticated={setAuthenticated}
-          />
+        <Route path="/">
+          <div className="h-screen">
+            <LandingPage />
+          </div>
         </Route>
-        <ProtectedRoute
-          path="/users"
-          exact={true}
-          authenticated={authenticated}
-        >
-          <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute
-          path="/users/:userId"
-          exact={true}
-          authenticated={authenticated}
-        >
-          <User />
-          <NewFolder />
-        </ProtectedRoute>
-        <ProtectedRoute
-          path="/folder/edit/:folderId"
-          authenticated={authenticated}
-        >
-          <EditFolder />
-        </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <h1>My Home Page</h1>
-        </ProtectedRoute>
+        <Route>
+          <h1>404 Not Found</h1>
+        </Route>
       </Switch>
     </BrowserRouter>
   );

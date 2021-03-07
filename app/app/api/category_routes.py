@@ -5,7 +5,7 @@ from app.models import Category
 category_routes= Blueprint('category', __name__)
 
 
-@category_routes.route("/")
+@category_routes.route("")
 def get_categories():
     user_categories = Category.query.filter_by(user_id=current_user.id)
     default_categories = Category.query.filter_by(user_id=None)

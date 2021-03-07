@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getCategories } from "../../../store/reducers/categories";
 import { createUserFolder } from "../../../store/reducers/user";

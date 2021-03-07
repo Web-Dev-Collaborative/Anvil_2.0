@@ -1,64 +1,59 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../store/reducers/user";
 
-const LoginForm = ({ authenticated, setAuthenticated }) => {
+const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+  const loggedIn = useSelector((state) =>
+    state.user.id ? state.user.id : null
+  );
 
   const onLogin = async (e) => {
     e.preventDefault();
     const user = await dispatch(login({ email, password }));
-    if (!user.errors) {
-      setAuthenticated(true);
-    } else {
+    if (user.errors) {
       setErrors(user.errors);
     }
   };
 
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  if (authenticated) {
+  if (loggedIn !== null) {
     return <Redirect to="/" />;
   }
 
   return (
-    <form onSubmit={onLogin}>
+    <form onSubmit={onLogin} className="bg-secondTransparent">
       <div>
         {errors.map((error) => (
           <div>{error}</div>
         ))}
       </div>
       <div>
-        <label htmlFor="email">Email</label>
         <input
           name="email"
           type="text"
-          placeholder="Email"
+          placeholder=" => Email"
           value={email}
-          onChange={updateEmail}
+          onChange={(e) => setEmail(e.target.value)}
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree ml-2"
         />
       </div>
       <div>
-        <label htmlFor="password">Password</label>
         <input
           name="password"
           type="password"
-          placeholder="Password"
+          placeholder="=> Password"
           value={password}
-          onChange={updatePassword}
+          onChange={(e) => setPassword(e.target.value)}
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne border-2 border-accentThree mt-2 ml-2 placeholder-accentOne"
         />
-        <button type="submit">Login</button>
+        <div className="bg-accentThree text-main text-xl font-bold m-2 rounded-md text-center p-2 ">
+          <button type="submit">Log In</button>
+        </div>
       </div>
     </form>
   );

@@ -1,86 +1,76 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../../store/reducers/user";
 
-const SignUpForm = ({ authenticated, setAuthenticated }) => {
+const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
 
   const dispatch = useDispatch();
+  const loggedIn = useSelector((state) =>
+    state.user.id ? state.user.id : null
+  );
 
-  const onSignUp = async (e) => {
+  const onSignUp = (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await dispatch(signup({ username, email, password }));
-      if (!user.errors) {
-        setAuthenticated(true);
-      }
+      dispatch(signup({ username, email, password }));
     }
   };
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const updateRepeatPassword = (e) => {
-    setRepeatPassword(e.target.value);
-  };
-
-  if (authenticated) {
+  if (loggedIn) {
     return <Redirect to="/" />;
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <form onSubmit={onSignUp} className="bg-secondTransparent">
       <div>
-        <label>User Name</label>
         <input
           type="text"
           name="username"
-          onChange={updateUsername}
+          placeholder="=> Username"
+          onChange={(e) => setUsername(e.target.value)}
           value={username}
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree ml-2"
         ></input>
       </div>
       <div>
-        <label>Email</label>
         <input
           type="text"
           name="email"
-          onChange={updateEmail}
+          placeholder="=> Email"
+          onChange={(e) => setEmail(e.target.value)}
           value={email}
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree ml-2 mt-2"
         ></input>
       </div>
       <div>
-        <label>Password</label>
         <input
           type="password"
           name="password"
-          onChange={updatePassword}
+          placeholder="=> Password"
+          onChange={(e) => setPassword(e.target.value)}
           value={password}
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree ml-2 mt-2"
         ></input>
       </div>
       <div>
-        <label>Repeat Password</label>
         <input
           type="password"
           name="repeat_password"
-          onChange={updateRepeatPassword}
+          placeholder="=> Confirm Password"
+          onChange={(e) => setRepeatPassword(e.target.value)}
           value={repeatPassword}
           required={true}
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree ml-2 mt-2"
         ></input>
       </div>
-      <button type="submit">Sign Up</button>
+      <div className="bg-accentThree text-main text-xl font-bold m-2 rounded-md text-center p-2 ">
+        <button type="submit">Sign Up</button>
+      </div>
     </form>
   );
 };
