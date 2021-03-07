@@ -12,7 +12,7 @@ const setCategories = (categories) => ({
 });
 
 export const getCategories = () => async (dispatch) => {
-  const response = await fetch("/api/category/");
+  const response = await fetch("/api/category");
   const parsedResponse = await response.json();
   dispatch(setCategories(parsedResponse));
   return parsedResponse;

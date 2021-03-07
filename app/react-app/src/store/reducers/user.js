@@ -144,7 +144,7 @@ const userReducer = (state = initialState, action) => {
       return saveUserInfo;
 
     case REMOVE_USER:
-      const removeUserInfo = { ...state, initialState };
+      const removeUserInfo = { ...initialState };
       return removeUserInfo;
 
     case CREATE_FOLDER:
