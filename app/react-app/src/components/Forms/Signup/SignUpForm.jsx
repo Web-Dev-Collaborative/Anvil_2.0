@@ -68,7 +68,7 @@ const SignUpForm = () => {
           className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree ml-2 mt-2"
         ></input>
       </div>
-      <div className="bg-accentThree text-main text-xl font-bold m-2 rounded-md text-center p-2 ">
+      <div className="bg-accentThree text-main text-xl font-bold m-2 rounded-md text-center p-2 transform hover:scale-105">
         <button type="submit">Sign Up</button>
       </div>
     </form>

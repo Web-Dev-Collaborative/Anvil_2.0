@@ -24,9 +24,7 @@ const CommandPrompt = ({ location, setLocation }) => {
         );
         break;
       case "/login":
-        setPromptText(
-          "Let me see your identification... and go about your business"
-        );
+        setPromptText("Papers please");
         break;
       case "/sign-up":
         setPromptText("Welcome to the dark side, we have cookies :) ");
@@ -42,7 +40,7 @@ const CommandPrompt = ({ location, setLocation }) => {
   );
 
   return (
-    <h1 className="font-jetbrains font-medium text-xl flex flex-row pb-5">
+    <h1 className="font-jetbrains font-medium text-lg flex flex-row pb-5">
       <span className="text-accentTwo">
         {" "}
         {location !== "/" ? (
@@ -60,7 +58,7 @@ const CommandPrompt = ({ location, setLocation }) => {
         )}{" "}
       </span>{" "}
       <span className="text-accentThree"> [{location}] $ </span>{" "}
-      <span className="text-white text-xl pl-3">
+      <span className="text-white text-md pl-3">
         {" "}
         {"  "} {promptText}{" "}
       </span>{" "}

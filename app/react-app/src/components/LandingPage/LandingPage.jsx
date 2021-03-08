@@ -30,10 +30,18 @@ const LandingPage = () => {
           </div>
         </div>
 
-        <div className="grid grid-row-2">
-          <div className="row-start-1 row-end-2 m-2 p-2 border-2 border-accentThree">
+        <div className="grid grid-row-2 h-full">
+          <div className="row-start-1 row-end-2 m-2 p-2 border-2 border-accentThree ">
             <CommandPrompt location={location} />
-            <h1 className="text-accentOne">About</h1>
+            <div className="mt-12 ml-12">
+              <p className="text-accentOne text-xl mb-2">Welcome to Anvil!</p>
+              <hr className="w-1/5 mb-2" />
+              <p className="text-accentOne text-xl">
+                Developers love terminals right? Well here is an editor, that
+                looks like a terminal, in your browser, to handle all of your
+                editing needs!
+              </p>
+            </div>
           </div>
 
           <div className="row-start-2 row-end-3 m-2 p-2 border-2 border-accentThree">

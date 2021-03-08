@@ -30,16 +30,26 @@ const NewFolder = () => {
 
   return (
     <div>
-      <h1>New Folder Form</h1>
-      <form onSubmit={onSubmit}>
+      <h1 className="text-accentOne text-3xl mb-6 font-jetbrains">
+        New Folder
+      </h1>
+      <form
+        onSubmit={onSubmit}
+        className="bg-secondTransparent flex flex-col w-96"
+      >
         <input
           type="text"
           name="name"
           onChange={(e) => setName(e.target.value)}
-          placeholder=" => folder name"
+          placeholder="=> folder name"
           value={name}
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree font-jetbrains"
         />
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="font-jetbrains text-xl mt-4 mb-6 text-accentOne m-auto w-full h-12 bg-secondary outline-none"
+        >
           {categoryList &&
             categoryList.map((category) => (
               <option value={category.id} key={category.id}>
@@ -47,7 +57,9 @@ const NewFolder = () => {
               </option>
             ))}
         </select>
-        <button type="submit">Submit</button>
+        <div className="bg-accentThree text-main text-xl font-bold m-2 rounded-md text-center p-2 font-jetbrains cursor-pointer transform hover:scale-105">
+          <button type="submit">Submit</button>
+        </div>
       </form>
     </div>
   );

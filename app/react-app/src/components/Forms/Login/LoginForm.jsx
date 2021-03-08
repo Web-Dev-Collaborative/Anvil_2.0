@@ -36,10 +36,10 @@ const LoginForm = () => {
         <input
           name="email"
           type="text"
-          placeholder=" => Email"
+          placeholder="=> Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree ml-2"
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree ml-2 font-jetbrains"
         />
       </div>
       <div>
@@ -49,9 +49,9 @@ const LoginForm = () => {
           placeholder="=> Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne border-2 border-accentThree mt-2 ml-2 placeholder-accentOne"
+          className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne border-2 border-accentThree mt-2 ml-2 placeholder-accentOne font-jetbrains"
         />
-        <div className="bg-accentThree text-main text-xl font-bold m-2 rounded-md text-center p-2 ">
+        <div className="bg-accentThree text-main text-xl font-bold m-2 rounded-md text-center p-2 font-jetbrains transform hover:scale-105">
           <button type="submit">Log In</button>
         </div>
       </div>
