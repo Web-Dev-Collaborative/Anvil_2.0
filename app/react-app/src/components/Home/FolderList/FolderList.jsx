@@ -1,5 +1,5 @@
 import Folder from "./Folder";
-
+import "./Folder.css";
 const FolderList = ({ selectedItem, setSelectedItem, user, setLocation }) => {
   return (
     <div
