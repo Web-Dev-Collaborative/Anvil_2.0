@@ -42,7 +42,7 @@ const EditFolder = () => {
 
   return (
     <div>
-      <h1 className="text-accentOne text-3xl mb-6 font-jetbrains">
+      <h1 className="text-accentOne text-2xl mb-6 font-jetbrains">
         Edit <span className="text-accentThree">"{name}"</span> Folder
       </h1>
       {userFolder && (
@@ -54,6 +54,7 @@ const EditFolder = () => {
             type="text"
             name="name"
             onChange={(e) => setName(e.target.value)}
+            autoComplete="off"
             value={name}
             className="bg-secondTransparent text-xl text-left pl-3 pb-3 pt-3 text-accentOne outline-none placeholder-accentOne border-2 border-accentThree font-jetbrains"
           />

@@ -1,5 +1,6 @@
 import { Switch, Route } from "react-router-dom";
 import { EditFolder, NewFolder } from "../../Forms";
+import TextEditor from "./TextEditor";
 
 const MainBody = () => {
   return (
@@ -9,7 +10,9 @@ const MainBody = () => {
     >
       <Switch>
         <Route exact path="/home">
-          <h1>Something goes here</h1>
+          <div className="flex justify-center items-center w-full h-full">
+            <TextEditor />
+          </div>
         </Route>
         <Route path="/home/folder/edit/:id">
           <div>
