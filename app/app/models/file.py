@@ -7,7 +7,8 @@ class File(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
-    s3_url = db.Column(db.String(255), nullable=False)
+    content = db.Column(db.Text(), nullable=True)
+    s3_url = db.Column(db.String(255), nullable=True)
     folder_id = db.Column(db.Integer,
                           db.ForeignKey('folders.id',
                                         onupdate="CASCADE",
@@ -30,6 +31,7 @@ class File(db.Model):
         return {
             "id": self.id,
             "name": self.name,
+            "content": self.content,
             "s3_url": self.s3_url,
             "file_type": self.file_type,
             "created_at": self.created_at,
