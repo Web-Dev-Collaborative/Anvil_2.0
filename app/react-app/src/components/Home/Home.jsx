@@ -18,7 +18,7 @@ const Home = () => {
 
   return (
     <div id="full-screen" className="bg-main h-screen">
-      <div id="page-body" className=" flex flex-col h-full overflow-auto pr-80">
+      <div id="page-body" className=" flex flex-col h-full pr-80">
         <div
           id="prompt-area"
           className="flex flex-row h-16 ml-10 mr-10 justify-between pt-10 mb-10 font-jetbrains"
@@ -27,7 +27,7 @@ const Home = () => {
         </div>
         <div
           id="container"
-          className="h-full mb-10 ml-10 mr-10 mt-5 bg-secondTransparent2 shadow-lg"
+          className="h-full mb-10 ml-10 mr-10 mt-5 bg-secondTransparent2 border-2 border-accentThree shadow-lg overflow-hidden"
         >
           <MainBody />
         </div>
