@@ -43,14 +43,18 @@ const CommandPrompt = ({ location, setLocation }) => {
     <h1 className="font-jetbrains font-medium text-lg flex flex-row pb-5">
       <span className="text-accentTwo">
         {" "}
-        {location !== "/" ? (
-          <Link
-            to={username ? "/home" : "/"}
-            onClick={() => setLocation("/home")}
-          >
-            {" "}
-            {username ? `${username}@Anvil:` : "null@Anvil:"}{" "}
-          </Link>
+        {location !== "/" &&
+        location !== "/login" &&
+        location !== "/sign-up" ? (
+          <div className="transform hover:scale-105">
+            <Link
+              to={username ? "/home" : "/"}
+              onClick={() => setLocation("/home")}
+            >
+              {" "}
+              {username ? `${username}@Anvil:` : "null@Anvil:"}{" "}
+            </Link>
+          </div>
         ) : username ? (
           `${username}@Anvil:`
         ) : (

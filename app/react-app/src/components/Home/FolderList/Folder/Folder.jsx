@@ -15,14 +15,21 @@ const Folder = ({ folder, selectedItem, setSelectedItem, setLocation }) => {
   return (
     <li
       key={folder.id}
-      className="font-jetbrainstext text-xl text-accentOne cursor-pointer font-jetbrains"
+      className="font-jetbrainstext text-xl cursor-pointer font-jetbrains"
       onClick={() =>
         selectedItem !== folder.id
           ? setSelectedItem(folder.id)
           : setSelectedItem(null)
       }
     >
-      <p className="relative inline-block">
+      <p
+        className="relative inline-block hover:underline"
+        style={
+          selectedItem === folder.id
+            ? { color: "#50fa7b" }
+            : { color: "#8be9fd" }
+        }
+      >
         {selectedItem === folder.id ? `v ${folder.name}` : `> ${folder.name}`}
       </p>
       <div

@@ -52,18 +52,18 @@ const Home = () => {
               <LogoutButton />
             </div>
             <div className="flex flex-row justify-between w-1/2 mt-6 text-accentOne text-2xl">
-              <button>
+              <button className="transform hover:scale-105">
                 <a href="https://www.linkedin.com/in/william-vincent-5658851ba/">
                   <FontAwesomeIcon icon={faLinkedin} />
                 </a>
               </button>
-              <button>
+              <button className="transform hover:scale-105">
                 <a href="https://github.com/WJVincent">
                   <FontAwesomeIcon icon={faGithub} />
                 </a>
               </button>
 
-              <button>
+              <button className="transform hover:scale-105">
                 <a href="https://github.com/WJVincent/Anvil">
                   <FontAwesomeIcon icon={faCodeBranch} />
                 </a>

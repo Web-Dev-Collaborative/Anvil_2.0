@@ -30,8 +30,8 @@ const LandingPage = () => {
           </div>
         </div>
 
-        <div className="grid grid-row-2 h-full">
-          <div className="row-start-1 row-end-2 m-2 p-2 border-2 border-accentThree ">
+        <div className="grid grid-row-6 h-full">
+          <div className="row-start-1 row-end-2 m-2 p-2 border-2 border-accentThree">
             <CommandPrompt location={location} />
             <div className="mt-12 ml-12">
               <p className="text-accentOne text-xl mb-2">Welcome to Anvil!</p>
@@ -44,36 +44,38 @@ const LandingPage = () => {
             </div>
           </div>
 
-          <div className="row-start-2 row-end-3 m-2 p-2 border-2 border-accentThree">
+          <div className="row-start-2 row-end-7 m-2 p-2 border-2 border-accentThree">
             <CommandPrompt location={location} />
-            <Switch>
-              <Route exact path="/login">
-                <div className="flex mt-12 ml-12">
-                  <LoginForm />
-                </div>
-              </Route>
-              <Route exact path="/sign-up">
-                <div className="flex mt-12 ml-12">
-                  <SignUpForm />
-                </div>
-              </Route>
-            </Switch>
+            <div className="flex justify-center items-center h-5/6 overflow-hidden">
+              <Switch>
+                <Route exact path="/login">
+                  <div>
+                    <LoginForm />
+                  </div>
+                </Route>
+                <Route exact path="/sign-up">
+                  <div>
+                    <SignUpForm />
+                  </div>
+                </Route>
+              </Switch>
+            </div>
           </div>
         </div>
       </div>
       <div className="flex flex-row justify-between w-1/2 m-auto text-accentOne text-3xl">
-        <button>
+        <button className="transform hover:scale-105">
           <a href="https://www.linkedin.com/in/william-vincent-5658851ba/">
             <FontAwesomeIcon icon={faLinkedin} />
           </a>
         </button>
-        <button>
+        <button className="transform hover:scale-105">
           <a href="https://github.com/WJVincent">
             <FontAwesomeIcon icon={faGithub} />
           </a>
         </button>
 
-        <button>
+        <button className="transform hover:scale-105">
           <a href="https://github.com/WJVincent/Anvil">
             <FontAwesomeIcon icon={faCodeBranch} />
           </a>
