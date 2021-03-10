@@ -33,7 +33,7 @@ class File(db.Model):
             "name": self.name,
             "content": self.content,
             "s3_url": self.s3_url,
-            "file_type": self.file_type,
+            "file_type": self.file_type.to_dict(),
             "created_at": self.created_at,
             "updated_at": self.updated_at,
             "file_tags": [user_file_tag.to_dict() for user_file_tag in self.file_tag],
