@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faCodeBranch } from "@fortawesome/free-solid-svg-icons";
+import { faCode } from "@fortawesome/free-solid-svg-icons";
 
 import { LoginForm, SignUpForm } from "../Forms";
 import CommandPrompt from "../CommandPrompt";
@@ -77,7 +77,7 @@ const LandingPage = () => {
 
         <button className="transform hover:scale-105">
           <a href="https://github.com/WJVincent/Anvil">
-            <FontAwesomeIcon icon={faCodeBranch} />
+            <FontAwesomeIcon icon={faCode} />
           </a>
         </button>
       </div>

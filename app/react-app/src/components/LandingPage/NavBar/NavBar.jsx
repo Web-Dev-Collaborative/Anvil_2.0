@@ -12,13 +12,13 @@ const NavBar = ({ setLocation }) => {
     <nav className="bg-secondary shadow-custom-shadow flex flex-row justify-between">
       {!currentUser && (
         <div className="text-accentOne text-xl flex p-2">
-          <div className="pl-3">
+          <div className="pl-3 hover:underline">
             <Link to="/login" onClick={() => setLocation("/login")}>
               Login
             </Link>
           </div>
           <p className="pl-2"> | </p>
-          <div className="pl-2">
+          <div className="pl-2 hover:underline">
             <Link to="/sign-up" onClick={() => setLocation("/sign-up")}>
               Sign Up
             </Link>

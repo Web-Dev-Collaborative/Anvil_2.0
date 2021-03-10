@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDumpsterFire, faPenSquare } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt, faPenSquare } from "@fortawesome/free-solid-svg-icons";
 
 import { deleteUserFolder } from "../../../../store/reducers/user";
 
@@ -42,7 +42,7 @@ const Folder = ({ folder, selectedItem, setSelectedItem, setLocation }) => {
       >
         <div className="flex flex-row justify-between pt-2 pl-4">
           <button
-            className="text-accentTwo"
+            className="text-accentTwo transform hover:scale-105"
             onClick={() => setLocation(window.location.pathname)}
           >
             <Link to={`/home/folder/edit/${folder.id}`}>
@@ -52,9 +52,9 @@ const Folder = ({ folder, selectedItem, setSelectedItem, setLocation }) => {
 
           <button
             onClick={() => SubmitDelete(folder.id)}
-            className="pl-1 text-accentFour"
+            className="pl-1 text-accentFour transform hover:scale-105"
           >
-            <FontAwesomeIcon icon={faDumpsterFire} />
+            <FontAwesomeIcon icon={faTrashAlt} />
           </button>
         </div>
       </div>

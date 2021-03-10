@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faCodeBranch } from "@fortawesome/free-solid-svg-icons";
+import { faCode } from "@fortawesome/free-solid-svg-icons";
 
 import PromptArea from "./PromptArea";
 import MainBody from "./MainBody";
@@ -65,7 +65,7 @@ const Home = () => {
 
               <button className="transform hover:scale-105">
                 <a href="https://github.com/WJVincent/Anvil">
-                  <FontAwesomeIcon icon={faCodeBranch} />
+                  <FontAwesomeIcon icon={faCode} />
                 </a>
               </button>
             </div>

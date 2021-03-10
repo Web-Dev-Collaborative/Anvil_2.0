@@ -12,7 +12,11 @@ const DemoUserButton = ({ setLocation }) => {
     history.push("/home");
   };
 
-  return <button onClick={loginDemo}>Demo User</button>;
+  return (
+    <button className="hover:underline" onClick={loginDemo}>
+      Demo User
+    </button>
+  );
 };
 
 export default DemoUserButton;
