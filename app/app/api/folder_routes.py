@@ -10,11 +10,11 @@ folder_routes = Blueprint('folders', __name__)
 
 def form_errors(validation_errors):
 
-    errorMessages = []
+    error_messages = []
     for field in validation_errors:
         for error in validation_errors[field]:
-            errorMessages.append(f"{field} : {error}")
-    return errorMessages
+            error_messages.append(f"{field} : {error}")
+    return error_messages
 
 
 @folder_routes.route('', methods=['POST'])
