@@ -11,6 +11,7 @@ const REMOVE_USER = "user/removeUser";
 const GET_FOLDER = "user/getFolder";
 const CREATE_FOLDER = "user/createFolder";
 const UPDATE_FOLDER = "user/updateFolder";
+const CREATE_FILE = "user/createFile";
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -131,6 +132,30 @@ export const createUserFolder = ({ name, userId, categoryId }) => async (
 
 export const deleteUserFolder = (id) => async (dispatch) => {
   const response = await fetch(`/api/folder/${id}`, { method: "DELETE" });
+  const parsedResponse = await response.json();
+  dispatch(updateFolder(parsedResponse));
+  return parsedResponse;
+};
+
+export const createUserFile = ({
+  name,
+  content,
+  url,
+  folderId,
+  fileTypeId,
+}) => async (dispatch) => {
+  const response = await fetch("/api/file", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: name,
+      content: content,
+      s3_url: url,
+      folder_id: folderId,
+      file_type_id: fileTypeId,
+    }),
+  });
+
   const parsedResponse = await response.json();
   dispatch(updateFolder(parsedResponse));
   return parsedResponse;

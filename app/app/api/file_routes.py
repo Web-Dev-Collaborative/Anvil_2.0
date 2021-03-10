@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 # import datetime
 
 
-from app.models import db, File
+from app.models import db, File, Folder
 from app.forms import NewFileForm
 
 file_routes = Blueprint('files', __name__)
@@ -32,5 +32,7 @@ def create_file():
 
         db.session.add(file)
         db.session.commit()
-        return file.to_dict()
+        user_folders = Folder.query.filter_by(user_id=current_user.id)
+
+        return {"folders": [folder.to_dict() for folder in user_folders]}
     return {'errors': form_errors(form.errors)}
