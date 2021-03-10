@@ -9,10 +9,14 @@ const DemoUserButton = ({ setLocation }) => {
   const loginDemo = async (e) => {
     dispatch(login({ email: "demo@aa.io", password: "password" }));
     setLocation("/");
-    history.push("/");
+    history.push("/home");
   };
 
-  return <button onClick={loginDemo}>Demo User</button>;
+  return (
+    <button className="hover:underline" onClick={loginDemo}>
+      Demo User
+    </button>
+  );
 };
 
 export default DemoUserButton;

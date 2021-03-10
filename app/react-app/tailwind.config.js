@@ -16,7 +16,7 @@ module.exports = {
         secondTransparent: "rgba(68, 71, 90, 0)",
         secondTransparent2: "rgba(68, 71, 90, 0.4)",
         secondTransparent3: "rgba(68, 71, 90, 0.8)",
-        mainTransparent: "rgb(40,42,54, 0.7)",
+        mainTransparent: "rgb(40,42,54, 0.9)",
         modal: "rgba(0,0,0,0.7)",
       },
     },

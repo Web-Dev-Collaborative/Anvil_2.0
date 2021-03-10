@@ -17,7 +17,7 @@ const PromptArea = ({ location, setLocation }) => {
           <FontAwesomeIcon icon={faFileCode} />
         </button>
         <button
-          className=" text-accentTwo text-3xl pl-2"
+          className=" text-accentTwo text-3xl pl-2 transform hover:scale-105"
           onClick={() => setLocation(window.location.pathname)}
         >
           <Link to="/home/folder/new">
