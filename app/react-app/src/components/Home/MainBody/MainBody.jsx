@@ -12,7 +12,7 @@ const MainBody = () => {
   const [name, setName] = useState("");
   const [content, setContent] = useState({});
   const [url, setUrl] = useState("");
-  const [folderId, setFolderId] = useState(null);
+  const [folderId, setFolderId] = useState(undefined);
   const [fileTypeId, setFileTypeId] = useState(null);
 
   const saveFile = () => {

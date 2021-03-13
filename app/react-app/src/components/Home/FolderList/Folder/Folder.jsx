@@ -12,6 +12,7 @@ const Folder = ({ folder, selectedItem, setSelectedItem, setLocation }) => {
   const SubmitDelete = (folderId) => {
     dispatch(deleteUserFolder(folderId));
   };
+
   return (
     <li
       key={folder.id}

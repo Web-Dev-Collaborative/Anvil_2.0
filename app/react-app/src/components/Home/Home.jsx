@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faCode } from "@fortawesome/free-solid-svg-icons";
@@ -10,11 +10,21 @@ import FolderList from "./FolderList";
 import LogoutButton from "../auth/LogoutButton";
 import Logo from "./Logo";
 
+import { getUserFolder, removeSelectedFolder } from "../../store/reducers/user";
+
 const Home = () => {
+  const dispatch = useDispatch();
+
   const [location, setLocation] = useState(window.location.pathname);
   const [selectedItem, setSelectedItem] = useState(null);
 
   const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    selectedItem
+      ? dispatch(getUserFolder(selectedItem))
+      : dispatch(removeSelectedFolder());
+  }, [dispatch, selectedItem]);
 
   return (
     <div id="full-screen" className="bg-main h-screen">

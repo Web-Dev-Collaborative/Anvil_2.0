@@ -11,6 +11,7 @@ const REMOVE_USER = "user/removeUser";
 const GET_FOLDER = "user/getFolder";
 const CREATE_FOLDER = "user/createFolder";
 const UPDATE_FOLDER = "user/updateFolder";
+const REMOVE_SELECTED = "user/removeSelected";
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -34,6 +35,10 @@ const updateFolder = (newFolderList) => ({
 const createFolder = (folder) => ({
   type: CREATE_FOLDER,
   folder,
+});
+
+const removeFolder = () => ({
+  type: REMOVE_SELECTED,
 });
 
 export const signup = ({ username, email, password }) => async (dispatch) => {
@@ -90,6 +95,10 @@ export const getUserFolder = (id) => async (dispatch) => {
   const parsedResponse = await response.json();
   dispatch(getFolder(parsedResponse));
   return parsedResponse;
+};
+
+export const removeSelectedFolder = () => async (dispatch) => {
+  dispatch(removeFolder());
 };
 
 export const editUserFolder = ({ id, name, category }) => async (dispatch) => {
@@ -188,6 +197,10 @@ const userReducer = (state = initialState, action) => {
     case GET_FOLDER:
       const selectedUserFolder = { ...state, selectedFolder: action.folder };
       return selectedUserFolder;
+
+    case REMOVE_SELECTED:
+      const removeSelectedFolder = { ...state, selectedFolder: null };
+      return removeSelectedFolder;
 
     default:
       return state;

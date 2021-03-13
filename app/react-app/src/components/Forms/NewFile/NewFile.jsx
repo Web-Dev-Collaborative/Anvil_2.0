@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const NewFile = ({ name, setName, folderId, setFolderId }) => {
