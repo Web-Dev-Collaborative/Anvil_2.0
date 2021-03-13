@@ -18,6 +18,9 @@ const CommandPrompt = ({ location, setLocation }) => {
       case "/home/folder/new":
         setPromptText("mkdir new-folder ");
         break;
+      case "/home/file/new":
+        setPromptText("touch new-file");
+        break;
       case "/home":
         setPromptText(
           ' ~/ sweet ~/  => echo "Windows users wouldn\'t understand "'

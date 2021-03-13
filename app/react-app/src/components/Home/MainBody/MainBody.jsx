@@ -1,19 +1,31 @@
-import { Switch, Route } from "react-router-dom";
-import { EditFolder, NewFolder } from "../../Forms";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Switch, Route, useHistory } from "react-router-dom";
+import { EditFolder, NewFolder, NewFile } from "../../Forms";
 import TextEditor from "./TextEditor";
+import { createUserFile } from "../../../store/reducers/user";
 
 const MainBody = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const [name, setName] = useState("");
+  const [content, setContent] = useState({});
+  const [url, setUrl] = useState("");
+  const [folderId, setFolderId] = useState(null);
+  const [fileTypeId, setFileTypeId] = useState(null);
+
+  const saveFile = () => {
+    dispatch(createUserFile({ name, content, url, folderId, fileTypeId }));
+    history.push("/home");
+  };
   return (
     <div
       id="forms-and-notes"
       className="flex h-full w-full items-center justify-center"
     >
       <Switch>
-        <Route exact path="/home">
-          <div className="flex justify-center items-center w-full h-full">
-            <TextEditor />
-          </div>
-        </Route>
+        <Route exact path="/home"></Route>
         <Route path="/home/folder/edit/:id">
           <div>
             <EditFolder />
@@ -24,9 +36,28 @@ const MainBody = () => {
             <NewFolder />
           </div>
         </Route>
-        <Route path="/home/file/new">{/* <CreateFileForm /> */}</Route>
-        <Route path="/home/file/edit">
-          <div className="w-full font-jetbrains">{/* <TextEditor /> */}</div>
+        <Route path="/home/file/new">
+          <NewFile
+            name={name}
+            setName={setName}
+            folderId={folderId}
+            setFolderId={setFolderId}
+          />
+        </Route>
+        <Route path="/home/file/edit/:id">
+          <div className="w-full font-jetbrains">
+            <div className="flex justify-center items-center flex-col w-full h-full p-3">
+              <TextEditor content={content} setContent={setContent} />
+              <div
+                className="bg-accentThree text-main text-xl font-bold m-2 rounded-md text-center p-2 font-jetbrains cursor-pointer transform hover:scale-105 w-20"
+                onClick={saveFile}
+              >
+                <button type="submit" onclick={saveFile}>
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
         </Route>
       </Switch>
     </div>

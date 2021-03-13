@@ -1,12 +1,20 @@
 import { useQuill } from "react-quilljs";
-
+import { useEffect } from "react";
 import "./editor.css";
 
-const TextEditor = () => {
+const TextEditor = ({ content, setContent }) => {
   const { quill, quillRef } = useQuill();
 
   console.log("quill -----> :", quill);
   console.log("quillRef -----> :", quillRef);
+
+  useEffect(() => {
+    if (quill) {
+      quill.on("text-change", () => {
+        setContent(quill.getContents());
+      });
+    }
+  }, [quill, setContent]);
 
   return (
     <div

@@ -18,7 +18,7 @@ class File(db.Model):
                              db.ForeignKey('file_type.id',
                                            onupdate="CASCADE",
                                            ondelete="CASCADE"),
-                             nullable=False)
+                             nullable=True)
 
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)

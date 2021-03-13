@@ -11,7 +11,6 @@ const REMOVE_USER = "user/removeUser";
 const GET_FOLDER = "user/getFolder";
 const CREATE_FOLDER = "user/createFolder";
 const UPDATE_FOLDER = "user/updateFolder";
-const CREATE_FILE = "user/createFile";
 
 const setUser = (user) => ({
   type: SET_USER,
