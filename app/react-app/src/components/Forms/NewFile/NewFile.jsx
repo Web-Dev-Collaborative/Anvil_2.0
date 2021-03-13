@@ -1,14 +1,44 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { createUserFile } from "../../../store/reducers/user";
 
-const NewFile = ({ name, setName, folderId, setFolderId }) => {
+const NewFile = ({
+  name,
+  setName,
+  folderId,
+  setFolderId,
+  url,
+  setUrl,
+  fileTypeId,
+  setFileTypeId,
+}) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const folderList = useSelector((state) => state.user.folders);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const data = {
+      name: name,
+      content: null,
+      url: url,
+      folderId: folderId,
+      fileTypeId: fileTypeId,
+    };
+    dispatch(createUserFile(data));
+    history.push("/home");
+  };
 
   return (
     <div>
       <h1 className="text-accentOne text-3xl mb-6 font-jetbrains">
         Create a File
       </h1>
-      <form className="bg-secondTransparent flex flex-col w-96">
+      <form
+        className="bg-secondTransparent flex flex-col w-96"
+        onSubmit={onSubmit}
+      >
         <input
           type="text"
           name="name"

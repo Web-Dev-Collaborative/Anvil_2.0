@@ -8,4 +8,4 @@ class NewFileForm(FlaskForm):
     content = TextField('content')
     s3_url = StringField('s3_url')
     folder_id = IntegerField('folder_id', validators=[DataRequired()])
-    file_type_id = TextField('file_type_id' , validators=[DataRequired()])
+    file_type_id = TextField('file_type_id')

@@ -13,7 +13,7 @@ const MainBody = () => {
   const [content, setContent] = useState({});
   const [url, setUrl] = useState("");
   const [folderId, setFolderId] = useState(undefined);
-  const [fileTypeId, setFileTypeId] = useState(null);
+  const [fileTypeId, setFileTypeId] = useState(1);
 
   const saveFile = () => {
     dispatch(createUserFile({ name, content, url, folderId, fileTypeId }));
@@ -42,6 +42,10 @@ const MainBody = () => {
             setName={setName}
             folderId={folderId}
             setFolderId={setFolderId}
+            url={url}
+            setUrl={setUrl}
+            fileTypeId={fileTypeId}
+            setFileTypeId={setFileTypeId}
           />
         </Route>
         <Route path="/home/file/edit/:id">
