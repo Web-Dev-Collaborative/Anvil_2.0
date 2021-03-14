@@ -24,6 +24,7 @@ const MainBody = () => {
     dispatch(editUserFile({ fileId, name, contentString, folderId }));
     history.push("/home");
   };
+
   return (
     <div
       id="forms-and-notes"
@@ -75,7 +76,11 @@ const MainBody = () => {
         </Route>
         <Route path="/home/file/edit/:id">
           <div className="flex justify-center items-center flex-col w-full h-full p-3">
-            <TextEditor content={content} setContent={setContent} />
+            <TextEditor
+              content={content}
+              setContent={setContent}
+              fileId={fileId}
+            />
             <div
               className="bg-accentThree text-main text-xl font-bold m-2 rounded-md text-center p-2 font-jetbrains cursor-pointer transform hover:scale-105 w-20"
               onClick={saveFile}

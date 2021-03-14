@@ -4,6 +4,7 @@ const initialState = {
   username: null,
   folders: [],
   selectedFolder: null,
+  selectedFile: null,
 };
 
 const SET_USER = "user/setUser";
@@ -12,6 +13,7 @@ const GET_FOLDER = "user/getFolder";
 const CREATE_FOLDER = "user/createFolder";
 const UPDATE_FOLDER = "user/updateFolder";
 const REMOVE_SELECTED = "user/removeSelected";
+const GET_FILE = "user/getFile";
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -39,6 +41,11 @@ const createFolder = (folder) => ({
 
 const removeFolder = () => ({
   type: REMOVE_SELECTED,
+});
+
+const getFile = (file) => ({
+  type: GET_FILE,
+  file,
 });
 
 export const signup = ({ username, email, password }) => async (dispatch) => {
@@ -94,6 +101,13 @@ export const getUserFolder = (id) => async (dispatch) => {
   const response = await fetch(`/api/folder/${id}`);
   const parsedResponse = await response.json();
   dispatch(getFolder(parsedResponse));
+  return parsedResponse;
+};
+
+export const getUserFile = (id) => async (dispatch) => {
+  const response = await fetch(`/api/file/${id}`);
+  const parsedResponse = await response.json();
+  dispatch(getFile(parsedResponse));
   return parsedResponse;
 };
 
@@ -219,6 +233,10 @@ const userReducer = (state = initialState, action) => {
     case GET_FOLDER:
       const selectedUserFolder = { ...state, selectedFolder: action.folder };
       return selectedUserFolder;
+
+    case GET_FILE:
+      const selectedUserFile = { ...state, selectedFile: action.file };
+      return selectedUserFile;
 
     case REMOVE_SELECTED:
       const removeSelectedFolder = { ...state, selectedFolder: null };

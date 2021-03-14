@@ -34,14 +34,17 @@ def create_file():
         return {"folders": [folder.to_dict() for folder in user_folders]}
     return {'errors': form_errors(form.errors)}
 
-@file_routes.route("/<int:id>", methods=["PUT"])
+@file_routes.route("/<int:id>", methods=["PUT", "GET"])
 @login_required
 def update_file(id):
     file = File.query.get(id)
-    data = request.json
-    file.name = data["name"]
-    file.content = data["content"]
-    db.session.commit()
+    if request.method == "PUT":
+        data = request.json
+        file.name = data["name"]
+        file.content = data["content"]
+        db.session.commit()
+    elif request.method == "GET":
+        return file.to_dict()
 
     user_folders = Folder.query.filter_by(user_id=current_user.id)
     return {"folders": [folder.to_dict() for folder in user_folders]}
