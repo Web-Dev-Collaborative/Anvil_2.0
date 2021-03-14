@@ -1,10 +1,8 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-# import datetime
-
 
 from app.models import db, File, Folder
-from app.forms import NewFileForm
+from app.forms import NewFileForm, EditFileForm
 
 file_routes = Blueprint('files', __name__)
 
@@ -18,12 +16,10 @@ def form_errors(validation_errors):
 @file_routes.route("", methods=['POST'])
 @login_required
 def create_file():
-    print("------------> Route Hit <---------------------------")
     form = NewFileForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
-        print("------------> Form Validated<---------------------------")
         file = File(
             name = form.data['name'],
             content = form.data['content'],
@@ -37,3 +33,15 @@ def create_file():
 
         return {"folders": [folder.to_dict() for folder in user_folders]}
     return {'errors': form_errors(form.errors)}
+
+@file_routes.route("/<int:id>", methods=["PUT"])
+@login_required
+def update_file(id):
+    file = File.query.get(id)
+    data = request.json
+    file.name = data["name"]
+    file.content = data["content"]
+    db.session.commit()
+
+    user_folders = Folder.query.filter_by(user_id=current_user.id)
+    return {"folders": [folder.to_dict() for folder in user_folders]}

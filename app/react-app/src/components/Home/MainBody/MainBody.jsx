@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Switch, Route, useHistory, Link } from "react-router-dom";
 import { EditFolder, NewFolder, NewFile } from "../../Forms";
 import TextEditor from "./TextEditor";
-import { createUserFile } from "../../../store/reducers/user";
+import { editUserFile } from "../../../store/reducers/user";
 
 const MainBody = () => {
   const dispatch = useDispatch();
@@ -14,9 +14,14 @@ const MainBody = () => {
   const [url, setUrl] = useState("");
   const [folderId, setFolderId] = useState(undefined);
   const [fileTypeId, setFileTypeId] = useState(1);
+  const [fileId, setFileId] = useState(undefined);
+
+  const currentFolder = useSelector((state) => state.user.selectedFolder);
 
   const saveFile = () => {
-    dispatch(createUserFile({ name, content, url, folderId, fileTypeId }));
+    const contentString = JSON.stringify(content);
+    console.log(contentString);
+    dispatch(editUserFile({ fileId, name, contentString, folderId }));
     history.push("/home");
   };
   return (
@@ -25,7 +30,27 @@ const MainBody = () => {
       className="flex h-full w-full items-center justify-center"
     >
       <Switch>
-        <Route exact path="/home"></Route>
+        <Route exact path="/home">
+          <div>
+            <ul>
+              {currentFolder &&
+                currentFolder.files &&
+                currentFolder.files.map((file) => (
+                  <Link
+                    key={file.id}
+                    to={`/home/file/edit/${file.id}`}
+                    className="font-jetbrainstext text-xl cursor-pointer font-jetbrains text-accentOne m-2 p-2 hover:underline"
+                    onClick={() => {
+                      setFileId(file.id);
+                      setName(file.name);
+                    }}
+                  >
+                    {file.name}
+                  </Link>
+                ))}
+            </ul>
+          </div>
+        </Route>
         <Route path="/home/folder/edit/:id">
           <div>
             <EditFolder />
@@ -49,17 +74,15 @@ const MainBody = () => {
           />
         </Route>
         <Route path="/home/file/edit/:id">
-          <div className="w-full font-jetbrains">
-            <div className="flex justify-center items-center flex-col w-full h-full p-3">
-              <TextEditor content={content} setContent={setContent} />
-              <div
-                className="bg-accentThree text-main text-xl font-bold m-2 rounded-md text-center p-2 font-jetbrains cursor-pointer transform hover:scale-105 w-20"
-                onClick={saveFile}
-              >
-                <button type="submit" onclick={saveFile}>
-                  Save
-                </button>
-              </div>
+          <div className="flex justify-center items-center flex-col w-full h-full p-3">
+            <TextEditor content={content} setContent={setContent} />
+            <div
+              className="bg-accentThree text-main text-xl font-bold m-2 rounded-md text-center p-2 font-jetbrains cursor-pointer transform hover:scale-105 w-20"
+              onClick={saveFile}
+            >
+              <button type="submit" onClick={saveFile}>
+                Save
+              </button>
             </div>
           </div>
         </Route>

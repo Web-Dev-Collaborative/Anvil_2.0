@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +8,7 @@ import { deleteUserFolder } from "../../../../store/reducers/user";
 
 const Folder = ({ folder, selectedItem, setSelectedItem, setLocation }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const SubmitDelete = (folderId) => {
     dispatch(deleteUserFolder(folderId));
@@ -17,11 +18,6 @@ const Folder = ({ folder, selectedItem, setSelectedItem, setLocation }) => {
     <li
       key={folder.id}
       className="font-jetbrainstext text-xl cursor-pointer font-jetbrains"
-      onClick={() =>
-        selectedItem !== folder.id
-          ? setSelectedItem(folder.id)
-          : setSelectedItem(null)
-      }
     >
       <p
         className="relative inline-block hover:underline"
@@ -30,6 +26,12 @@ const Folder = ({ folder, selectedItem, setSelectedItem, setLocation }) => {
             ? { color: "#50fa7b" }
             : { color: "#8be9fd" }
         }
+        onClick={() => {
+          selectedItem !== folder.id
+            ? setSelectedItem(folder.id)
+            : setSelectedItem(null);
+          return history.push("/home");
+        }}
       >
         {selectedItem === folder.id ? `v ${folder.name}` : `> ${folder.name}`}
       </p>

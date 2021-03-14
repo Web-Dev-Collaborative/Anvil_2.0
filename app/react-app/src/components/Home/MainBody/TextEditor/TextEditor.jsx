@@ -5,9 +5,6 @@ import "./editor.css";
 const TextEditor = ({ content, setContent }) => {
   const { quill, quillRef } = useQuill();
 
-  console.log("quill -----> :", quill);
-  console.log("quillRef -----> :", quillRef);
-
   useEffect(() => {
     if (quill) {
       quill.on("text-change", () => {

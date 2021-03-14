@@ -152,7 +152,6 @@ export const createUserFile = ({
   folderId,
   fileTypeId,
 }) => async (dispatch) => {
-  console.log("--------------------> Hit <--------------------");
   const response = await fetch("/api/file", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -164,6 +163,29 @@ export const createUserFile = ({
       file_type_id: fileTypeId,
     }),
   });
+  const parsedResponse = await response.json();
+  dispatch(updateFolder(parsedResponse));
+  return parsedResponse;
+};
+
+export const editUserFile = ({
+  fileId,
+  name,
+  contentString,
+  folderId,
+}) => async (dispatch) => {
+  const response = await fetch(`/api/file/${fileId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: name,
+      folder_id: folderId,
+      content: contentString,
+    }),
+  });
+
   const parsedResponse = await response.json();
   dispatch(updateFolder(parsedResponse));
   return parsedResponse;
