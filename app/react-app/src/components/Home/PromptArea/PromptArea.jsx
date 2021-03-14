@@ -11,10 +11,12 @@ const PromptArea = ({ location, setLocation }) => {
 
       <div className="pr-5">
         <button
-          disabled={true}
-          className=" text-accentTwo text-3xl cursor-not-allowed pr-2"
+          className=" text-accentTwo text-3xl pr-2 transform hover:scale-105"
+          onClick={() => setLocation(window.location.pathname)}
         >
-          <FontAwesomeIcon icon={faFileCode} />
+          <Link to="/home/file/new">
+            <FontAwesomeIcon icon={faFileCode} />
+          </Link>
         </button>
         <button
           className=" text-accentTwo text-3xl pl-2 transform hover:scale-105"

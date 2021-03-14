@@ -1,12 +1,38 @@
+import { useEffect } from "react";
 import { useQuill } from "react-quilljs";
-
+import { useDispatch, useSelector } from "react-redux";
 import "./editor.css";
 
-const TextEditor = () => {
+import { getUserFile } from "../../../../store/reducers/user";
+
+const TextEditor = ({ content, setContent, fileId }) => {
+  const dispatch = useDispatch();
   const { quill, quillRef } = useQuill();
 
-  console.log("quill -----> :", quill);
-  console.log("quillRef -----> :", quillRef);
+  const fileContent = useSelector((state) => state.user.selectedFile);
+
+  useEffect(() => {
+    if (quill) {
+      quill.on("text-change", () => {
+        setContent(quill.getContents());
+      });
+    }
+  }, [quill, setContent]);
+
+  useEffect(() => {
+    dispatch(getUserFile(fileId));
+  }, [dispatch, fileId]);
+
+  useEffect(() => {
+    if (quill && fileContent) {
+      if (fileContent.content !== null) {
+        const parsedContent = JSON.parse(fileContent.content);
+        quill.setContents(parsedContent.ops);
+      } else {
+        quill.setContents([{ insert: "" }]);
+      }
+    }
+  }, [fileContent, quill]);
 
   return (
     <div

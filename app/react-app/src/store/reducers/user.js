@@ -4,6 +4,7 @@ const initialState = {
   username: null,
   folders: [],
   selectedFolder: null,
+  selectedFile: null,
 };
 
 const SET_USER = "user/setUser";
@@ -11,7 +12,8 @@ const REMOVE_USER = "user/removeUser";
 const GET_FOLDER = "user/getFolder";
 const CREATE_FOLDER = "user/createFolder";
 const UPDATE_FOLDER = "user/updateFolder";
-const CREATE_FILE = "user/createFile";
+const REMOVE_SELECTED = "user/removeSelected";
+const GET_FILE = "user/getFile";
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -35,6 +37,15 @@ const updateFolder = (newFolderList) => ({
 const createFolder = (folder) => ({
   type: CREATE_FOLDER,
   folder,
+});
+
+const removeFolder = () => ({
+  type: REMOVE_SELECTED,
+});
+
+const getFile = (file) => ({
+  type: GET_FILE,
+  file,
 });
 
 export const signup = ({ username, email, password }) => async (dispatch) => {
@@ -91,6 +102,17 @@ export const getUserFolder = (id) => async (dispatch) => {
   const parsedResponse = await response.json();
   dispatch(getFolder(parsedResponse));
   return parsedResponse;
+};
+
+export const getUserFile = (id) => async (dispatch) => {
+  const response = await fetch(`/api/file/${id}`);
+  const parsedResponse = await response.json();
+  dispatch(getFile(parsedResponse));
+  return parsedResponse;
+};
+
+export const removeSelectedFolder = () => async (dispatch) => {
+  dispatch(removeFolder());
 };
 
 export const editUserFolder = ({ id, name, category }) => async (dispatch) => {
@@ -155,6 +177,28 @@ export const createUserFile = ({
       file_type_id: fileTypeId,
     }),
   });
+  const parsedResponse = await response.json();
+  dispatch(updateFolder(parsedResponse));
+  return parsedResponse;
+};
+
+export const editUserFile = ({
+  fileId,
+  name,
+  contentString,
+  folderId,
+}) => async (dispatch) => {
+  const response = await fetch(`/api/file/${fileId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: name,
+      folder_id: folderId,
+      content: contentString,
+    }),
+  });
 
   const parsedResponse = await response.json();
   dispatch(updateFolder(parsedResponse));
@@ -189,6 +233,14 @@ const userReducer = (state = initialState, action) => {
     case GET_FOLDER:
       const selectedUserFolder = { ...state, selectedFolder: action.folder };
       return selectedUserFolder;
+
+    case GET_FILE:
+      const selectedUserFile = { ...state, selectedFile: action.file };
+      return selectedUserFile;
+
+    case REMOVE_SELECTED:
+      const removeSelectedFolder = { ...state, selectedFolder: null };
+      return removeSelectedFolder;
 
     default:
       return state;
