@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Switch, Route, useHistory, Link } from "react-router-dom";
 import { EditFolder, NewFolder, NewFile } from "../../Forms";
@@ -17,7 +17,13 @@ const MainBody = () => {
   const [fileId, setFileId] = useState(undefined);
 
   const currentFolder = useSelector((state) => state.user.selectedFolder);
+  const defaultFolder = useSelector((state) => state.user.folders[0]);
 
+  useEffect(() => {
+    if (defaultFolder) {
+      setFolderId(defaultFolder.id);
+    }
+  }, [defaultFolder, setFolderId]);
   const saveFile = () => {
     const contentString = JSON.stringify(content);
     console.log(contentString);
