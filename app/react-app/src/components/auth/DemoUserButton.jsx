@@ -9,7 +9,7 @@ const DemoUserButton = ({ setLocation }) => {
   const loginDemo = async (e) => {
     dispatch(login({ email: "demo@aa.io", password: "password" }));
     setLocation("/");
-    history.push("/home");
+    history.push("/");
   };
 
   return (
